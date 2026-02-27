@@ -1,0 +1,3 @@
+Create a venv: use python 3.8 since the lab uses it.
+install ffmpeg : conda install -c conda-forge ffmpeg
+run the code : python 3
