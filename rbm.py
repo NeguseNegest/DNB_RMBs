@@ -366,7 +366,11 @@ class RestrictedBoltzmannMachine():
 
         # [TODO TASK 4.2] perform same computation as the function 'get_h_given_v' but with directed connections (replace the zeros below) 
         
-        return np.zeros((n_samples,self.ndim_hidden)), np.zeros((n_samples,self.ndim_hidden))
+        support = visible_minibatch @ self.weight_v_to_h + self.bias_h[None, :]
+        h_prob = sigmoid(support)
+        h_act = sample_binary(h_prob)
+
+        return h_prob, h_act
 
 
     def get_v_given_h_dir(self,hidden_minibatch):
@@ -400,16 +404,18 @@ class RestrictedBoltzmannMachine():
             # this case should never be executed : when the RBM is a part of a DBN and is at the top, it will have not have directed connections.
             # Appropriate code here is to raise an error (replace pass below)
             
-            pass
+            raise RuntimeError("get_v_given_h_dir() should not be called for the top RBM in a DBN (top RBM stays undirected).")
             
         else:
                         
             # [TODO TASK 4.2] performs same computaton as the function 'get_v_given_h' but with directed connections (replace the pass and zeros below)             
 
-            pass
+            support = hidden_minibatch @ self.weight_h_to_v + self.bias_v[None, :]
+            v_prob = sigmoid(support)
+            v_act = sample_binary(v_prob)
+
+            return v_prob, v_act
             
-        return np.zeros((n_samples,self.ndim_visible)), np.zeros((n_samples,self.ndim_visible))        
-        
     def update_generate_params(self,inps,trgs,preds):
         
         """Update generative weight "weight_h_to_v" and bias "bias_v"
@@ -450,4 +456,4 @@ class RestrictedBoltzmannMachine():
         self.weight_v_to_h += self.delta_weight_v_to_h
         self.bias_h += self.delta_bias_h
         
-        return    
+        return
