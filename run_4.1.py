@@ -50,7 +50,6 @@ if __name__ == "__main__":
 
     hidden_units_list = [500, 400, 300, 200]
 
-    # Leave rf images ON only for one run (e.g., hidden=500)
     SAVE_RF_FOR_HIDDEN = 500
 
     results_final_loss = {}
@@ -125,9 +124,6 @@ if __name__ == "__main__":
     plt.legend()
     plt.show()
 
-    # ---- Reconstructions: original (v0) above reconstruction (v1_prob) ----
-    # Pick which trained RBM you want to visualize (e.g., 500 hidden units)
-  
-    # Save and also show (optional)
+ 
     for nh in hidden_units_list:
         plot_reconstructions(trained_rbms[nh], test_imgs, n=20, seed=0, save_as=f"recon.hidden{nh}.png")
