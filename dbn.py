@@ -185,8 +185,10 @@ class DeepBeliefNet():
         
         n_sample = true_lbl.shape[0]
         
-        records = []        
-        fig,ax = plt.subplots(1,1,figsize=(3,3))
+        records = []
+        # Higher render resolution for mp4 output
+        fig,ax = plt.subplots(1,1,figsize=(6,6))
+        fig.set_dpi(250)
         plt.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=0, hspace=0)
         ax.set_xticks([]); ax.set_yticks([])
 
@@ -217,12 +219,34 @@ class DeepBeliefNet():
             vis_prob, vis_act = self.rbm_stack["vis--hid"].get_v_given_h_dir(hid_act)
 
             vis = vis_prob  # show probabilities
-            
-            records.append( [ ax.imshow(vis.reshape(self.image_size), cmap="bwr", vmin=0, vmax=1, animated=True, interpolation=None) ] )
+
+            records.append([
+                ax.imshow(
+                    vis.reshape(self.image_size),
+                    cmap="bwr",
+                    vmin=0,
+                    vmax=1,
+                    animated=True,
+                    interpolation="nearest",
+                )
+            ])
 
             v_top = np.concatenate([pen, lbl], axis=1)
             
-        anim = stitch_video(fig,records).save("%s.generate%d.mp4"%(name,np.argmax(true_lbl)))            
+        anim = stitch_video(fig,records)
+        anim.save(
+            "%s.generate%d.mp4"%(name,np.argmax(true_lbl)),
+            writer="ffmpeg",
+            dpi=250,
+            bitrate=5000,
+            extra_args=[
+                "-vcodec", "libx264",
+                "-pix_fmt", "yuv420p",
+                "-crf", "18",
+                "-preset", "medium",
+            ],
+        )
+        plt.close(fig)
             
         return
 

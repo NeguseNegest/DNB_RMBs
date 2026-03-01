@@ -302,8 +302,8 @@ class RestrictedBoltzmannMachine():
         if self.is_top:
 
             """
-            Here visible layer has both data and labels. Compute total input for each unit (identical for both cases), \ 
-            and split into two parts, something like support[:, :-self.n_labels] and support[:, -self.n_labels:]. \
+            Here visible layer has both data and labels. Compute total input for each unit (identical for both cases),
+            and split into two parts, something like support[:, :-self.n_labels] and support[:, -self.n_labels:].
             Then, for both parts, use the appropriate activation function to get probabilities and a sampling method \
             to get activities. The probabilities as well as activities can then be concatenated back into a normal visible layer.
             """
@@ -394,8 +394,8 @@ class RestrictedBoltzmannMachine():
         if self.is_top:
 
             """
-            Here visible layer has both data and labels. Compute total input for each unit (identical for both cases), \ 
-            and split into two parts, something like support[:, :-self.n_labels] and support[:, -self.n_labels:]. \
+            Here visible layer has both data and labels. Compute total input for each unit (identical for both cases),
+            and split into two parts, something like support[:, :-self.n_labels] and support[:, -self.n_labels:].
             Then, for both parts, use the appropriate activation function to get probabilities and a sampling method \
             to get activities. The probabilities as well as activities can then be concatenated back into a normal visible layer.
             """

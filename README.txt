@@ -13,6 +13,10 @@ Lab 4
 -----------------
 
 run.py			    Main file to run all networks.
+run_4.1.py		    Task 4.1 helper script (epoch-mode RBM + plots).
+run_4.2_1.py		    Task 4.2 helper script (2-RBM stack 784-500-500 + recon-loss plots).
+run_4.2_2.py		    Task 4.2 helper script (DBN recognition + convergence/accuracy plots).
+run_4.2_3.py		    Task 4.2 helper script (DBN generative mode + mp4 outputs).
 util.py			    Utility file containing activation functions, sampling methods, load/save files, etc.
 rbm.py			    Contains the Restricted Boltzmann Machine class.
 dbn.py			    Contains the Deep Belief Network class.
@@ -106,5 +110,4 @@ We give a rough estimate of how much running time can be expected for each secti
 TASK 4.1 Training time will be in the order 10-20 minutes for the whole training set.
 TASK 4.2 Since this involves training three seperate RBMs, it is in the order of three times longer than Task I, 30 to 90 minutes.
 TASK 4.3 In the range from 30 to 60 minutes.
-
 
